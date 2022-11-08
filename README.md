@@ -1,43 +1,43 @@
 # OAM Design System
 
-The following guide only explains how to include the `oam-design-system` in a new project. For usage information check the [documentation website](http://hotosm.github.io/oam-docs/).  
-
-For information on how to develop the `oam-design-system` checkout the [DEVELOPMENT.md](DEVELOPMENT.md)  
+以下 guide 僅說明如何在新項目中包含 `oam-design-system`。有關使用信息，請查看 [documentation website](http://hotosm.github.io/oam-docs/)。
+  
+有關如何開發 `oam-design-system` 的資料，請查看 [DEVELOPMENT.md](DEVELOPMENT.md)
 
 ---
 
-Style guide and UI components library that aims to standardize the look and feel across all OAM-related applications, while defining coding best practices and conventions.
+Style guide 和 UI components library，打算標準化所有 OAM 相關應用程序的外觀，同時定義編碼最佳 practices 和 conventions。
 
-Install it as an `npm` module: (module not available yet. use direct link)
+將它安裝為 `npm` 模組：（模組尚不可用。使用直接鏈接）
 ```
 npm install https://github.com/hotosm/oam-design-system#v1.0.0
 ```
-For the most recent version omit the tag.
+對於最新版本，請省略 tag。
 
-**Note:**
-This design system makes some assumptions which are described below for each of the elements.  
-Check the build system of [OAM docs](https://github.com/hotosm/oam-docs/blob/master/gulpfile.js), a project that uses the `oam-design-system`.
+**注意:**
+此 design system 對每個元素進行了一些假設，如下所述。
+檢查 [OAM docs](https://github.com/hotosm/oam-docs/blob/master/gulpfile.js) 的 build system，這是一個使用 `oam-design-system` 的 project。
 
-## Overview
+## 概述
 
-The shared assets are all in the `assets` directory. It is organized as follows:
+shared assets 都在 `assets` 目錄中。It is organized as follows:
 
 ### assets/scripts
-Utility libraries and shared components.
+Utility libraries 和 shared components.
 
-**USAGE**  
-Use as any node module:
+**用法**  
+用作任何 node 模組：
 ```js
 import { Dropdown, user } from 'oam-design-system';
-```
-If you want to minimize bundle size you can also include the components directly.  
-Bindings exported from `oam-design-system` are also available in `oam-design-system/assets/scripts`
+``` 
+如果您想最小化 bundle size，您還可以直接包含 components。
+Bindings exported from `oam-design-system` 也可在 `oam-design-system/assets/scripts` 中使用
 
 ### assets/styles
-Requires [Bourbon](https://github.com/lacroixdesign/node-bourbon) and [Jeet](https://github.com/mojotech/jeet).
+需要 [Bourbon](https://github.com/lacroixdesign/node-bourbon) 和 [Jeet](https://github.com/mojotech/jeet).
 
-**INSTALLATION**  
-Add the module path to the `includePaths` of gulp-sass. Should look something like:
+**安裝**  
+將模組路徑添加到 gulp-sass 的 `includePaths` 中。應該看起來像：
 ```js
 .pipe($.sass({
   outputStyle: 'expanded',
@@ -46,14 +46,14 @@ Add the module path to the `includePaths` of gulp-sass. Should look something li
 }))
 ```
 
-The `oam-design-system` uses **Open Sans** which is available on [Google Fonts](https://goo.gl/FZ0Ave).  
-It needs to be included in the app:
+`oam-design-system` 使用 [Google Fonts](https://goo.gl/FZ0Ave) 上提供的 **Open Sans**。
+它需要包含在應用程式中：
 ```
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700" />
 ```
 
-**USAGE**  
-Now you can include it in the main scss file:
+**用法**  
+現在您可以將它包含在 main scss 文件中：
 ```scss
 // Bourbon is a dependency
 @import "bourbon";
@@ -64,15 +64,15 @@ Now you can include it in the main scss file:
 ```
 
 ### assets/icons
-The `oam-design-system` includes svg icons that are compiled into a webfont and included in the styles.  
+`oam-design-system` 包括 svg 圖標，這些圖標被編譯成 webfont 並包含在樣式中。
 To use them check the `_oam-ds-icons.scss` for the class names.
 
 ### assets/graphics
-Graphics that are to be shared among projects.
+要在 projects 之間共享的 Graphics。
 
-**INSTALLATION**  
-Add the `graphicsMiddleware` to browserSync. This is only to aid development.  
-Should look something like:
+**安裝**  
+將 `graphicsMiddleware` 添加到 browserSync。這只是為了幫助 development。
+應該看起來像：
 ```js
 browserSync({
   port: 3000,
@@ -85,19 +85,19 @@ browserSync({
   }
 });
 ```
-*Basically every time there's a request to a path like `/assets/graphics/**`, browserSync will check in the `oam-design-system` folder first. If it doesn't find anything it will look in the normal project's asset folder.*
+*基本上，每次對 `/assets/graphics/**` 之類的路徑發出請求時，browserSync 都會首先檢查 `oam-design-system` 文件夾。如果它沒有找到任何東西，它將在 normal project 的 asset 文件夾中找。
 
-You also need to ensure that the images are copied over on build.
-This ensures that the graphics are copied over when building the project.
+您還需要確保在 build 時復製圖像。
+這可確保在 building the project 時復製 graphics。
 ```js
 gulp.task('images', function () {
   return gulp.src(['app/assets/graphics/**/*', require('oam-design-system/gulp-addons').graphicsPath + '/**/*'])
     .pipe($.cache($.imagemin({
 ```
 
-**USAGE**  
-Just include the images using the path `assets/graphics/[graphic-type]/[graphic-name]`.  
-All available images can be found [here](assets/graphics/).
+**用法**  
+只需使用路徑 `assets/graphics/[graphic-type]/[graphic-name]` 包含圖像。
+所有可用的圖像都可以在[這裡](assets/graphics/)找到。
 
 ## License
-Oam Design System is licensed under **BSD 3-Clause License**, see the [LICENSE](LICENSE) file for more details.
+Oam Design System 在 **BSD 3-Clause License** 下獲得許可，有關更多詳細信息，請參閱 [LICENSE](LICENSE) 文件。
